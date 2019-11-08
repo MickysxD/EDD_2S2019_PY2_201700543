@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package eddp2;
+import Estructuras.*;
+import Vistas.*;
 
 /**
  *
@@ -14,8 +16,16 @@ public class EDDP2 {
     /**
      * @param args the command line arguments
      */
+    
+    public static AVL av = new AVL();
+    
     public static void main(String[] args) {
-        // TODO code application logic here
+        
+        av.agregar(new NodoAVL("Jeje"));
+        new Inicio();
+        
     }
+    
+    
     
 }
