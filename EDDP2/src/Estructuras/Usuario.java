@@ -12,10 +12,12 @@ package Estructuras;
 public class Usuario {
     private String nombre;
     private String pass;
+    private Matriz archivos;
 
     public Usuario(String nombre, String pass) {
         this.nombre = nombre;
         this.pass = pass;
+        this.archivos = new Matriz();
     }
 
     public String getNombre() {
