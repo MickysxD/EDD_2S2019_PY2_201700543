@@ -17,15 +17,23 @@ public class EDDP2 {
      * @param args the command line arguments
      */
     
-    public static AVL av = new AVL();
+    public static AVL avl = new AVL();
+    public static NodoMatriz matriz = null;
     
     public static void main(String[] args) {
         
-        av.agregar(new NodoAVL("Jeje"));
-        new Inicio();
-        
+        //avl.agregar(new NodoAVL("Jeje"));
+        //new Inicio();
+        System.out.println(division("ab"));
     }
     
-    
+    public static int division(String nombre){
+        int suma = 0;
+        for (int i=0; i<nombre.length(); i++){
+            suma += (int) nombre.charAt(i);
+        }
+        
+        return suma%7;
+    }
     
 }

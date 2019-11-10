@@ -21,7 +21,7 @@ public class Inicio extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
         
-        nombre.setText(EDDP2.av.getRoot().getNombre());
+        nombre.setText(EDDP2.avl.getRoot().getNombre());
     }
 
     /**
