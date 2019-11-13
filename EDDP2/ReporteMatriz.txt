@@ -1,0 +1,20 @@
+digraph grafico{
+graph [nodesep=2];
+node [shape=record]
+rankdir=TB;
+"/1"[label="/"];
+"/nueva1"[label="nueva"];
+"/"[label="/"];
+"/nueva2"[label="/nueva"];
+"/nueva"[label="nueva"];
+"/1"->"/nueva1";
+"/nueva1"->"/nueva2";
+"/"->"/nueva2";
+"/"->"/nueva";
+"Micky"[label="", shape=point];
+"Micky"->"/1";
+"Micky"->"/";
+{ rank=same; "Micky" "/1" "/nueva1" }
+{ rank=same; "/" "/nueva2" }
+{ rank=same; "/nueva" }
+}

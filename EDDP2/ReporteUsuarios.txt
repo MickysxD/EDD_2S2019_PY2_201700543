@@ -1,0 +1,16 @@
+digraph grafico{
+graph [pad="0.5", nodesep="0.5", ranksep="2"];
+node [shape=plain]
+rankdir=LR;
+Foo [label=<
+<table border="0" cellborder="1" cellspacing="0">
+<tr><td><i><b>No.</b></i></td><td><i><b>Usuario</b></i></td></tr>
+<tr><td><b>0.</b></td><td><b>Usuario:</b> micky1 <b>Pass:</b> ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f <b>Time:</b> 2019-11-13 01:00:12.671</td></tr>
+<tr><td><b>1.</b></td><td></td></tr>
+<tr><td><b>2.</b></td><td><b>Usuario:</b> micky <b>Pass:</b> ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f <b>Time:</b> 2019-11-13 01:00:12.662</td></tr>
+<tr><td><b>3.</b></td><td><b>Usuario:</b> micky2 <b>Pass:</b> ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f <b>Time:</b> 2019-11-13 01:00:12.672</td></tr>
+<tr><td><b>4.</b></td><td></td></tr>
+<tr><td><b>5.</b></td><td></td></tr>
+<tr><td><b>6.</b></td><td></td></tr>
+</table>>];
+}

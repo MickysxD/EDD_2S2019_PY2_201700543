@@ -7,6 +7,7 @@ package Estructuras;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.io.*;
 
 /**
  *
@@ -31,17 +32,18 @@ public class TablaHash {
         boolean ag = false;
         int intento = 0;
 
-        if (usuarios[pos] != null) {
+        if (usuarios[pos] == null) {
             usuarios[pos] = nuevo;
             this.uso++;
             ag = true;
         } else {
             while (intento < 2 && ag == false) {
                 int n = (pos ^ intento) / this.size;
-                if (usuarios[n] != null) {
+                if (usuarios[n] == null) {
                     usuarios[n] = nuevo;
                     ag = true;
                     this.uso++;
+                    break;
                 }
                 intento += 1;
             }
@@ -52,6 +54,7 @@ public class TablaHash {
                         usuarios[i] = nuevo;
                         ag = true;
                         this.uso++;
+                        break;
                     }
                 }
             }
@@ -63,10 +66,10 @@ public class TablaHash {
     }
 
     public void lleno() {
-        if (this.uso >= this.size * .75) {
+        if (this.uso >= (this.size * .75)) {
             Usuario[] anterior = this.usuarios;
             this.usuarios = new Usuario[primo()];
-            
+
             for (int i = 0; i < anterior.length; i++) {
                 if (anterior[i] != null) {
                     agregar(anterior[i].getNombre(), anterior[i].getPass());
@@ -88,7 +91,7 @@ public class TablaHash {
     public int primo() {
         int i, j;
         boolean esPrimo;
-        int rInicial = this.size+1;//Rango inicial, este debe ser mayor de 1.
+        int rInicial = this.size + 1;//Rango inicial, este debe ser mayor de 1.
         int rFinal = 1000;//Rango final.
         for (i = rInicial; i <= rFinal; i++) {
             //recorro ciclo tantas veces como necesite(<= es para incluir el valor de rFinal).
@@ -107,6 +110,7 @@ public class TablaHash {
             }
         }
         this.size = i;
+        this.uso = 0;
         return i;
     }
 
@@ -129,4 +133,93 @@ public class TablaHash {
         return sb.toString();
     }
 
+    public void graficar() {
+        FileWriter fichero;
+        PrintWriter pw;
+        try {
+            fichero = new FileWriter("ReporteUsuarios.txt");
+            pw = new PrintWriter(fichero);
+
+            pw.write("digraph grafico{\ngraph [pad=\"0.5\", nodesep=\"0.5\", ranksep=\"2\"];\nnode [shape=plain]\nrankdir=LR;\n");
+            pw.append("Foo [label=<\n<table border=\"0\" cellborder=\"1\" cellspacing=\"0\">\n<tr><td><i><b>No.</b></i></td><td><i><b>Usuario</b></i></td></tr>\n");
+            int tam = uso;
+
+            for (int i = 0; i < usuarios.length; i++) {
+                if (usuarios[i] != null && tam > 0) {
+                    pw.append("<tr><td><b>"+i+".</b></td><td><b>Usuario:</b> " + usuarios[i].getNombre() + " <b>Pass:</b> " + usuarios[i].getPass() + " <b>Time:</b> " + usuarios[i].getTime() + "</td></tr>\n");
+                    tam -= 1;
+                }else{
+                    pw.append("<tr><td><b>"+i+".</b></td><td></td></tr>\n");
+                }
+            }
+
+            pw.append("</table>>];\n}");
+            
+            pw.close();
+            
+            try {
+                Runtime.getRuntime().exec("dot -Tjpg ReporteUsuarios.txt -o ReporteUsuarios.jpg");
+                //Runtime.getRuntime().exec("cmd /c start ReporteUsuarios.dot");
+                //Runtime.getRuntime().exec("cmd /c start ReporteUsuarios.jpg");
+            } catch (IOException ioe) {
+                System.out.println(ioe);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public boolean usuario(String nombre){
+        for (int i = 0; i < usuarios.length; i++) {
+            if(usuarios[i] != null && usuarios[i].getNombre().equals(nombre)){
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    public boolean pass(String pass){
+        if(pass.length() < 8){
+            return false;
+        }else{
+            return true;
+        }
+    }
+    
+    public Usuario validarUsuario(String nombre, String pass){
+        for (int i = 0; i < usuarios.length; i++) {
+            if(usuarios[i] != null && usuarios[i].getNombre().equals(nombre) && usuarios[i].getPass().equals(SHA256(pass))){
+                return usuarios[i];
+            }
+        }
+        return null;
+    }
+
+    public Usuario[] getUsuarios() {
+        return usuarios;
+    }
+
+    public void setUsuarios(Usuario[] usuarios) {
+        this.usuarios = usuarios;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+
+    public int getUso() {
+        return uso;
+    }
+
+    public void setUso(int uso) {
+        this.uso = uso;
+    }
+    
+    
 }

@@ -18,16 +18,18 @@ public class NodoMatriz {
     private String nombre;
     private String ruta;
     private NodoMatriz padre;
+    private NodoMatriz mismo;
 
     public NodoMatriz() {
         this.archivos = new AVL();
     }
     
-    public NodoMatriz(String nombre, String ruta, NodoMatriz padre) {
+    public NodoMatriz(String nombre, String ruta, NodoMatriz padre, NodoMatriz mismo) {
         this.archivos = new AVL();
         this.nombre = nombre;
         this.ruta = ruta;
         this.padre = padre;
+        this.mismo = mismo;
     }
     
     public NodoMatriz getSiguiente() {
@@ -92,6 +94,14 @@ public class NodoMatriz {
 
     public void setPadre(NodoMatriz padre) {
         this.padre = padre;
+    }
+
+    public NodoMatriz getMismo() {
+        return mismo;
+    }
+
+    public void setMismo(NodoMatriz mismo) {
+        this.mismo = mismo;
     }
     
     
