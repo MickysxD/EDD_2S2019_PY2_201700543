@@ -5,6 +5,9 @@
  */
 package Estructuras;
 
+import java.sql.Timestamp;
+import java.util.Date;
+
 /**
  *
  * @author Micky
@@ -19,6 +22,8 @@ public class NodoMatriz {
     private String ruta;
     private NodoMatriz padre;
     private NodoMatriz mismo;
+    private String time;
+    private int carpetas;
 
     public NodoMatriz() {
         this.archivos = new AVL();
@@ -30,6 +35,8 @@ public class NodoMatriz {
         this.ruta = ruta;
         this.padre = padre;
         this.mismo = mismo;
+        this.carpetas = 0;
+        this.time = new Timestamp(new Date().getTime()).toString();
     }
     
     public NodoMatriz getSiguiente() {
@@ -102,6 +109,22 @@ public class NodoMatriz {
 
     public void setMismo(NodoMatriz mismo) {
         this.mismo = mismo;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public int getCarpetas() {
+        return carpetas;
+    }
+
+    public void setCarpetas(int carpetas) {
+        this.carpetas = carpetas;
     }
     
     

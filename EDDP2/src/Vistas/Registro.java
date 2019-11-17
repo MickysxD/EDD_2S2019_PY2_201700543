@@ -22,14 +22,7 @@ public class Registro extends javax.swing.JFrame {
         setLayout(null);
         setLocationRelativeTo(null);
         setVisible(true);
-        EDDP2.tabla.agregar("micky", SHA256("12345678"));
-        EDDP2.tabla.agregar("micky1", SHA256("12345678"));
-        EDDP2.tabla.agregar("micky2", SHA256("12345678"));
-        EDDP2.tabla.getUsuarios()[0].getArchivos().agregarCarpeta(EDDP2.tabla.getUsuarios()[0].getArchivos().getRoot().getAbajo(), "prueba");
-        EDDP2.tabla.getUsuarios()[0].getArchivos().agregarCarpeta(EDDP2.tabla.getUsuarios()[0].getArchivos().getRoot().getAbajo(), "nueva");
-        EDDP2.tabla.getUsuarios()[0].getArchivos().eliminarCarpeta(EDDP2.tabla.getUsuarios()[0].getArchivos().getRoot().getAbajo(), "prueba");
-        EDDP2.tabla.getUsuarios()[0].getArchivos().graficarMatriz();
-        EDDP2.tabla.graficar();
+        
         
     }
 

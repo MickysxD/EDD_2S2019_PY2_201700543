@@ -5,6 +5,9 @@
  */
 package Estructuras;
 
+import java.sql.Timestamp;
+import java.util.Date;
+
 /**
  *
  * @author Micky
@@ -13,15 +16,21 @@ public class NodoAVL {
     private NodoAVL izq;
     private NodoAVL der;
     private String nombre;
+    private String contenido;
+    private String time;
+    private String propietario;
     private int altura;
     private int factor;
 
-    public NodoAVL(String nombre) {
+    public NodoAVL(String nombre, String contenido, String propietario) {
         this.izq = null;
         this.der = null;
         this.nombre = nombre;
+        this.contenido = contenido;
+        this.propietario = propietario;
         this.altura = 1;
         this.factor = 0;
+        this.time = new Timestamp(new Date().getTime()).toString();
     }
 
     public NodoAVL getIzq() {
@@ -63,7 +72,30 @@ public class NodoAVL {
     public void setFactor(int factor) {
         this.factor = factor;
     }
-    
+
+    public String getContenido() {
+        return contenido;
+    }
+
+    public void setContenido(String contenido) {
+        this.contenido = contenido;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getPropietario() {
+        return propietario;
+    }
+
+    public void setPropietario(String propietario) {
+        this.propietario = propietario;
+    }
     
     
 }

@@ -6,6 +6,8 @@
 package eddp2;
 import Estructuras.*;
 import Vistas.*;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Timestamp;
 import java.util.Date;
 
@@ -20,13 +22,51 @@ public class EDDP2 {
      */
     
     public static Usuario actual = null;
-    public static NodoMatriz matriz = null;
+    public static Matriz matriz = null;
     public static TablaHash tabla = new TablaHash();
+    public static NodoMatriz padre = null;
+    public static NodoMatriz carpetaC = null;
+    public static NodoAVL archivoM = null;
+    public static NodoAVL archivos[] = null;
+    public static String imagen = "";
+    
     
     public static void main(String[] args) {
+        tabla.agregar("micky", SHA256("12345678"));
+        tabla.agregar("micky1", SHA256("12345678"));
+        tabla.agregar("micky2", SHA256("12345678"));
+        tabla.getUsuarios()[0].getArchivos().getRoot().getAbajo().getArchivos().agregar(new NodoAVL("archivo.prueba","este archivo es de prueba",tabla.getUsuarios()[0].getNombre()));
+        tabla.getUsuarios()[0].getArchivos().agregarCarpeta(EDDP2.tabla.getUsuarios()[0].getArchivos().getRoot().getAbajo(), "prueba");
+        tabla.getUsuarios()[0].getArchivos().agregarCarpeta(EDDP2.tabla.getUsuarios()[0].getArchivos().getRoot().getAbajo(), "nueva");
+        tabla.getUsuarios()[0].getArchivos().agregarCarpeta(EDDP2.tabla.getUsuarios()[0].getArchivos().getRoot().getAbajo(), "qp2");
+        tabla.getUsuarios()[0].getArchivos().agregarCarpeta(EDDP2.tabla.getUsuarios()[0].getArchivos().getRoot().getAbajo().getAbajo(), "dentro de prueba");
+        tabla.getUsuarios()[0].getArchivos().agregarCarpeta(EDDP2.tabla.getUsuarios()[0].getArchivos().getRoot().getAbajo().getAbajo(), "dentro de prueba 2");
+        tabla.getUsuarios()[0].getArchivos().agregarCarpeta(EDDP2.tabla.getUsuarios()[0].getArchivos().getRoot().getAbajo().getAbajo().getAbajo(), "dentro de nueva");
+//        EDDP2.tabla.getUsuarios()[0].getArchivos().eliminarCarpeta(EDDP2.tabla.getUsuarios()[0].getArchivos().getRoot().getAbajo(), "prueba");
+//        EDDP2.tabla.getUsuarios()[0].getArchivos().modificarCarpeta(EDDP2.tabla.getUsuarios()[0].getArchivos().getRoot().getAbajo(), "nueva", "modificada");
+//        EDDP2.tabla.getUsuarios()[0].getArchivos().graficarMatriz();
+        //EDDP2.tabla.graficar();
         new Inicio();
         
     }
     
+    public static String SHA256(String password) {
+        MessageDigest md = null;
+        try {
+            md = MessageDigest.getInstance("SHA-256");
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        byte[] hash = md.digest(password.getBytes());
+        StringBuffer sb = new StringBuffer();
+
+        for (byte b : hash) {
+            sb.append(String.format("%02x", b));
+        }
+
+        return sb.toString();
+    }
     
 }

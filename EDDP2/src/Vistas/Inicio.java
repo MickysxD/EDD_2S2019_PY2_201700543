@@ -7,6 +7,8 @@ package Vistas;
 
 import eddp2.*;
 import Estructuras.*;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import javax.swing.JOptionPane;
 
 /**
@@ -23,9 +25,30 @@ public class Inicio extends javax.swing.JFrame {
         setLayout(null);
         setLocationRelativeTo(null);
         setVisible(true);
-
+        
+        nombre.setText("micky1");
+        pass.setText("12345678");
     }
 
+    public String SHA256(String password) {
+        MessageDigest md = null;
+        try {
+            md = MessageDigest.getInstance("SHA-256");
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        byte[] hash = md.digest(password.getBytes());
+        StringBuffer sb = new StringBuffer();
+
+        for (byte b : hash) {
+            sb.append(String.format("%02x", b));
+        }
+
+        return sb.toString();
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -137,11 +160,11 @@ public class Inicio extends javax.swing.JFrame {
             Usuario buscar = EDDP2.tabla.validarUsuario(nombre.getText(), pass.getText());
             if (buscar != null) {
                 EDDP2.actual = buscar;
+                EDDP2.matriz = buscar.getArchivos();
                 dispose();
                 new menuUsuario();
             }else{
                 JOptionPane.showMessageDialog(null, "Datos erroneos, intente de nuevo", "ERROR", JOptionPane.INFORMATION_MESSAGE);
-                
             }
 
         }

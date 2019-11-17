@@ -3,18 +3,56 @@ graph [nodesep=2];
 node [shape=record]
 rankdir=TB;
 "/1"[label="/"];
+"/prueba1"[label="prueba"];
 "/nueva1"[label="nueva"];
+"/qp21"[label="qp2"];
+"/prueba/dentro de prueba1"[label="dentro de prueba"];
+"/prueba/dentro de prueba 21"[label="dentro de prueba 2"];
+"/nueva/dentro de nueva1"[label="dentro de nueva"];
 "/"[label="/"];
-"/nueva2"[label="/nueva"];
+"/prueba2"[label="/prueba"];
+"/qp22"[label="/qp2"];
+"/prueba"[label="prueba"];
+"/prueba/dentro de prueba2"[label="prueba/dentro de prueba"];
+"/prueba/dentro de prueba 22"[label="prueba/dentro de prueba 2"];
 "/nueva"[label="nueva"];
-"/1"->"/nueva1";
+"/nueva/dentro de nueva2"[label="nueva/dentro de nueva"];
+"/qp2"[label="qp2"];
+"/prueba/dentro de prueba"[label="dentro de prueba"];
+"/prueba/dentro de prueba 2"[label="dentro de prueba 2"];
+"/nueva/dentro de nueva"[label="dentro de nueva"];
+"/1"->"/prueba1";
+"/prueba1"->"/prueba2";
+"/prueba1"->"/nueva1";
 "/nueva1"->"/nueva2";
-"/"->"/nueva2";
-"/"->"/nueva";
+"/nueva1"->"/qp21";
+"/qp21"->"/qp22";
+"/qp21"->"/prueba/dentro de prueba1";
+"/prueba/dentro de prueba1"->"/prueba/dentro de prueba2";
+"/prueba/dentro de prueba1"->"/prueba/dentro de prueba 21";
+"/prueba/dentro de prueba 21"->"/prueba/dentro de prueba 22";
+"/prueba/dentro de prueba 21"->"/nueva/dentro de nueva1";
+"/nueva/dentro de nueva1"->"/nueva/dentro de nueva2";
+"/"->"/prueba2";
+"/"->"/prueba";
+"/prueba2"->"/qp22";
+"/prueba"->"/prueba/dentro de prueba2";
+"/prueba"->"/nueva";
+"/prueba/dentro de prueba2"->"/prueba/dentro de prueba 22";
+"/nueva"->"/nueva/dentro de nueva2";
+"/nueva"->"/qp2";
+"/qp2"->"/prueba/dentro de prueba";
+"/prueba/dentro de prueba"->"/prueba/dentro de prueba 2";
+"/prueba/dentro de prueba 2"->"/nueva/dentro de nueva";
 "Micky"[label="", shape=point];
 "Micky"->"/1";
 "Micky"->"/";
-{ rank=same; "Micky" "/1" "/nueva1" }
-{ rank=same; "/" "/nueva2" }
-{ rank=same; "/nueva" }
+{ rank=same; "Micky" "/1" "/prueba1" "/nueva1" "/qp21" "/prueba/dentro de prueba1" "/prueba/dentro de prueba 21" "/nueva/dentro de nueva1" }
+{ rank=same; "/" "/prueba2" "/qp22" }
+{ rank=same; "/prueba" "/prueba/dentro de prueba2" "/prueba/dentro de prueba 22" }
+{ rank=same; "/nueva" "/nueva/dentro de nueva2" }
+{ rank=same; "/qp2" }
+{ rank=same; "/prueba/dentro de prueba" }
+{ rank=same; "/prueba/dentro de prueba 2" }
+{ rank=same; "/nueva/dentro de nueva" }
 }

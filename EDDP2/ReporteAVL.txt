@@ -1,0 +1,6 @@
+digraph grafico{
+graph [nodesep=2];
+node [shape=record]
+rankdir=TB;
+"archivo.prueba"[label= "Nombre: archivo.prueba\nNontenido: este archivo es de prueba\nAltura: 1\nFactor: 0\nTime: 2019-11-17 13:42:05.498\nPropietario: micky1"];
+}
