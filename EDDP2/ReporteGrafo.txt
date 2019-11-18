@@ -3,5 +3,5 @@ graph [nodesep=2];
 node [shape=record]
 rankdir=TB;
 "/Compartidos"[label="Compartidos"];
-"/"->"/Compartidos";
+"/"->"/Compartidos"[arrowhead=none];
 }

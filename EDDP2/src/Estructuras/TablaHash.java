@@ -133,7 +133,7 @@ public class TablaHash {
         return sb.toString();
     }
 
-    public void graficar() {
+    public boolean graficar() {
         FileWriter fichero;
         PrintWriter pw;
         try {
@@ -164,11 +164,12 @@ public class TablaHash {
             } catch (IOException ioe) {
                 System.out.println(ioe);
             }
-
+            
+            return true;
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        return false;
     }
 
     public boolean usuario(String nombre){

@@ -248,7 +248,7 @@ public class menuUsuario extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(12, 12, 12)
                                 .addComponent(jButton5)))
-                        .addGap(138, 138, 138)
+                        .addGap(114, 114, 114)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(gc)
                             .addGroup(layout.createSequentialGroup()
@@ -346,7 +346,7 @@ public class menuUsuario extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         grafo = m.graficarGrafo();
-        if (carpeta) {
+        if (grafo) {
             JOptionPane.showMessageDialog(null, "Reporte de grafo realizado", "Exito", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_jButton4ActionPerformed
