@@ -166,8 +166,8 @@ public class opcionesAgregar extends javax.swing.JFrame {
             
             if (!b) {
                 EDDP2.padre.getArchivos().agregar(new NodoAVL(nombrea.getText(), contenido.getText(), EDDP2.actual.getNombre()));
-                JOptionPane.showMessageDialog(null, "Archivo agregado con exito", "Exito", JOptionPane.INFORMATION_MESSAGE);
                 EDDP2.bitacora.meter(new NodoPila("Archivo nuevo: "+nombrea.getText(),EDDP2.actual.getNombre()));
+                JOptionPane.showMessageDialog(null, "Archivo agregado con exito", "Exito", JOptionPane.INFORMATION_MESSAGE);
                 dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "Nombre de archivo ya existe", "ERROR", JOptionPane.INFORMATION_MESSAGE);
@@ -175,6 +175,7 @@ public class opcionesAgregar extends javax.swing.JFrame {
 
         } else {
             EDDP2.padre.getArchivos().agregar(new NodoAVL(nombrea.getText(), contenido.getText(), EDDP2.actual.getNombre()));
+            EDDP2.bitacora.meter(new NodoPila("Archivo nuevo: "+nombrea.getText(),EDDP2.actual.getNombre()));
             JOptionPane.showMessageDialog(null, "Archivo agregado con exito", "Exito", JOptionPane.INFORMATION_MESSAGE);
             dispose();
         }
@@ -189,8 +190,8 @@ public class opcionesAgregar extends javax.swing.JFrame {
         boolean b = EDDP2.matriz.agregarCarpeta(EDDP2.padre, nombrec.getText());
 
         if (b) {
-            JOptionPane.showMessageDialog(null, "Carpeta agregada con exito", "Exito", JOptionPane.INFORMATION_MESSAGE);
             EDDP2.bitacora.meter(new NodoPila("Carpeta nueva: "+nombrec.getText(),EDDP2.actual.getNombre()));
+            JOptionPane.showMessageDialog(null, "Carpeta agregada con exito", "Exito", JOptionPane.INFORMATION_MESSAGE);
             dispose();
         } else {
             JOptionPane.showMessageDialog(null, "La carpeta no se a agregado", "ERROR", JOptionPane.INFORMATION_MESSAGE);

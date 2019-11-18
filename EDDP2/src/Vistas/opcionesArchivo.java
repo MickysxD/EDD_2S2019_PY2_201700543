@@ -183,8 +183,8 @@ public class opcionesArchivo extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         boolean p = EDDP2.padre.getArchivos().eliminar(EDDP2.archivoM.getNombre());
         if (p) {
-            JOptionPane.showMessageDialog(null, "Archivo eliminado", "Exito", JOptionPane.INFORMATION_MESSAGE);
             EDDP2.bitacora.meter(new NodoPila("Archivo eliminado: "+EDDP2.archivoM.getNombre(), EDDP2.actual.getNombre()));
+            JOptionPane.showMessageDialog(null, "Archivo eliminado", "Exito", JOptionPane.INFORMATION_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(null, "ERROR: no se pudo eliminar", "Error", JOptionPane.INFORMATION_MESSAGE);
         }
@@ -206,8 +206,8 @@ public class opcionesArchivo extends javax.swing.JFrame {
                 if (!t) {
                     boolean p = EDDP2.padre.getArchivos().editar(EDDP2.archivoM.getNombre(), nombre.getText(), contenido.getText());
                     if (p) {
+                        EDDP2.bitacora.meter(new NodoPila("Archivo modificado: "+EDDP2.archivoM.getNombre()+" (a) "+nombre.getText(),EDDP2.actual.getNombre()));
                         JOptionPane.showMessageDialog(null, "Archivo modificado", "Exito", JOptionPane.INFORMATION_MESSAGE);
-                        EDDP2.bitacora.meter(new NodoPila("Archivo modificado: "+EDDP2.archivoM.getNombre()+"->"+nombre.getText(),EDDP2.actual.getNombre()));
                         dispose();
                     } else {
                         JOptionPane.showMessageDialog(null, "ERROR: no se pudo modificar", "Error", JOptionPane.INFORMATION_MESSAGE);
@@ -245,8 +245,8 @@ public class opcionesArchivo extends javax.swing.JFrame {
         if (t) {
             if (us != null) {
                 us.getArchivos().getRoot().getAbajo().getAbajo().getArchivos().agregar(new NodoAVL(EDDP2.archivoM.getNombre(), EDDP2.archivoM.getContenido(), us.getNombre()));
+                EDDP2.bitacora.meter(new NodoPila("Archivo compartido: "+EDDP2.archivoM.getNombre() +" (a) "+us.getNombre(),EDDP2.actual.getNombre()));
                 JOptionPane.showMessageDialog(null, "Archivo compartido con exito", "Exito", JOptionPane.INFORMATION_MESSAGE);
-                EDDP2.bitacora.meter(new NodoPila("Archivo compartido: "+EDDP2.archivoM.getNombre() +"->"+us.getNombre(),EDDP2.actual.getNombre()));
                 dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "ERROR: nombre de usuario no existe", "Error", JOptionPane.INFORMATION_MESSAGE);

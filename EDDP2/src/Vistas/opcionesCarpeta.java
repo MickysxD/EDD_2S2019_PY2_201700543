@@ -141,7 +141,7 @@ public class opcionesCarpeta extends javax.swing.JFrame {
         if (!nombre.getText().equals("")) {
             boolean p = EDDP2.matriz.modificarCarpeta(EDDP2.padre, EDDP2.carpetaC.getNombre(), nombre.getText());
             if (p) {
-                EDDP2.bitacora.meter(new NodoPila("Carpeta modificada: "+EDDP2.carpetaC.getNombre(),EDDP2.actual.getNombre()));
+                EDDP2.bitacora.meter(new NodoPila("Carpeta modificada: "+EDDP2.carpetaC.getNombre()+" (a) "+nombre.getText(),EDDP2.actual.getNombre()));
                 JOptionPane.showMessageDialog(null, "Carpeta modificada", "Exito", JOptionPane.INFORMATION_MESSAGE);
             } else {
                 JOptionPane.showMessageDialog(null, "ERROR: no se pudo modificar", "Error", JOptionPane.INFORMATION_MESSAGE);

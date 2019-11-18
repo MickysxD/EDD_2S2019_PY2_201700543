@@ -206,7 +206,9 @@ public class AVL {
             nn.setTime(root.getTime());
             nuevo.agregar(nn);
         } else {
-            nuevo.agregar(root);
+            NodoAVL nn = new NodoAVL(root.getNombre(), root.getContenido(), root.getPropietario());
+            nn.setTime(root.getTime());
+            nuevo.agregar(nn);
         }
 
         if (root.getIzq() != null) {
