@@ -7,6 +7,9 @@ package Vistas;
 
 import Estructuras.*;
 import eddp2.*;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import javax.swing.JOptionPane;
 
 /**
@@ -51,6 +54,7 @@ public class opcionesArchivo extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         usuario = new javax.swing.JTextField();
         time = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -107,41 +111,58 @@ public class opcionesArchivo extends javax.swing.JFrame {
 
         time.setText("jLabel4");
 
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/descarga.png"))); // NOI18N
+        jButton4.setText("Descargar");
+        jButton4.setBorderPainted(false);
+        jButton4.setContentAreaFilled(false);
+        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(78, 78, 78)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(n, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jToggleButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE))
+                        .addGap(78, 78, 78)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(n, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jToggleButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(35, 35, 35)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                                            .addComponent(nombre)
+                                            .addComponent(usuario)
+                                            .addComponent(time, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel1)
+                                        .addGap(59, 59, 59))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(114, 114, 114)
+                                        .addComponent(jLabel2))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(105, 105, 105)
+                                        .addComponent(jLabel3))))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(35, 35, 35)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-                                    .addComponent(nombre)
-                                    .addComponent(usuario)
-                                    .addComponent(time, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel1)
-                                .addGap(59, 59, 59))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(114, 114, 114)
-                                .addComponent(jLabel2))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(105, 105, 105)
-                                .addComponent(jLabel3)))))
+                        .addGap(200, 200, 200)
+                        .addComponent(jButton4)))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -166,15 +187,16 @@ public class opcionesArchivo extends javax.swing.JFrame {
                         .addGap(17, 17, 17)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(usuario, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-                        .addGap(43, 43, 43))
+                        .addComponent(usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addComponent(jButton3)))
+                .addGap(14, 14, 14)
+                .addComponent(jButton4)
+                .addGap(0, 14, Short.MAX_VALUE))
         );
 
         pack();
@@ -183,12 +205,12 @@ public class opcionesArchivo extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         boolean p = EDDP2.padre.getArchivos().eliminar(EDDP2.archivoM.getNombre());
         if (p) {
-            EDDP2.bitacora.meter(new NodoPila("Archivo eliminado: "+EDDP2.archivoM.getNombre(), EDDP2.actual.getNombre()));
+            EDDP2.bitacora.meter(new NodoPila("Archivo eliminado: " + EDDP2.archivoM.getNombre(), EDDP2.actual.getNombre()));
             JOptionPane.showMessageDialog(null, "Archivo eliminado", "Exito", JOptionPane.INFORMATION_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(null, "ERROR: no se pudo eliminar", "Error", JOptionPane.INFORMATION_MESSAGE);
         }
-    
+
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -206,7 +228,7 @@ public class opcionesArchivo extends javax.swing.JFrame {
                 if (!t) {
                     boolean p = EDDP2.padre.getArchivos().editar(EDDP2.archivoM.getNombre(), nombre.getText(), contenido.getText());
                     if (p) {
-                        EDDP2.bitacora.meter(new NodoPila("Archivo modificado: "+EDDP2.archivoM.getNombre()+" (a) "+nombre.getText(),EDDP2.actual.getNombre()));
+                        EDDP2.bitacora.meter(new NodoPila("Archivo modificado: " + EDDP2.archivoM.getNombre() + " (a) " + nombre.getText(), EDDP2.actual.getNombre()));
                         JOptionPane.showMessageDialog(null, "Archivo modificado", "Exito", JOptionPane.INFORMATION_MESSAGE);
                         dispose();
                     } else {
@@ -231,32 +253,62 @@ public class opcionesArchivo extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         Usuario us = EDDP2.tabla.buscar(usuario.getText());
-        NodoAVL temp[] = us.getArchivos().getRoot().getAbajo().getAbajo().getArchivos().getArray();
-        boolean t = true;
+        if (us != null) {
+            NodoAVL temp[] = us.getArchivos().getRoot().getAbajo().getAbajo().getArchivos().getArray();
+            boolean t = true;
 
-        if (temp != null) {
-            for (int i = 0; i < temp.length; i++) {
-                if (temp[i].getNombre().equals(EDDP2.archivoM.getNombre())) {
-                    t = false;
+            if (temp != null) {
+                for (int i = 0; i < temp.length; i++) {
+                    if (temp[i].getNombre().equals(EDDP2.archivoM.getNombre())) {
+                        t = false;
+                    }
                 }
             }
-        }
 
-        if (t) {
-            if (us != null) {
+            if (t) {
+
                 us.getArchivos().getRoot().getAbajo().getAbajo().getArchivos().agregar(new NodoAVL(EDDP2.archivoM.getNombre(), EDDP2.archivoM.getContenido(), us.getNombre()));
-                EDDP2.bitacora.meter(new NodoPila("Archivo compartido: "+EDDP2.archivoM.getNombre() +" (a) "+us.getNombre(),EDDP2.actual.getNombre()));
+                EDDP2.bitacora.meter(new NodoPila("Archivo compartido: " + EDDP2.archivoM.getNombre() + " (a) " + us.getNombre(), EDDP2.actual.getNombre()));
                 JOptionPane.showMessageDialog(null, "Archivo compartido con exito", "Exito", JOptionPane.INFORMATION_MESSAGE);
                 dispose();
+
             } else {
-                JOptionPane.showMessageDialog(null, "ERROR: nombre de usuario no existe", "Error", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "ERROR: nombre de archivo ya existe en el destino", "Error", JOptionPane.INFORMATION_MESSAGE);
             }
         } else {
-            JOptionPane.showMessageDialog(null, "ERROR: nombre de archivo ya existe en el destino", "Error", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "ERROR: nombre de usuario no existe", "Error", JOptionPane.INFORMATION_MESSAGE);
         }
 
 
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        FileWriter fichero;
+        PrintWriter pw;
+        try {
+            fichero = new FileWriter(EDDP2.archivoM.getNombre() + ".txt");
+            pw = new PrintWriter(fichero);
+
+            pw.append(EDDP2.archivoM.getContenido());
+
+            pw.close();
+
+            try {
+                Runtime.getRuntime().exec("dot -Tjpg ReporteBitacora.txt -o ReporteBitacora.jpg");
+                //Runtime.getRuntime().exec("cmd /c start ReporteUsuarios.dot");
+                //Runtime.getRuntime().exec("cmd /c start ReporteUsuarios.jpg");
+            } catch (IOException ioe) {
+                System.out.println(ioe);
+            }
+
+            JOptionPane.showMessageDialog(null, "Archivos descargado", "Exito", JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al descargar", "Error", JOptionPane.INFORMATION_MESSAGE);
+        }
+
+        dispose();
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -298,6 +350,7 @@ public class opcionesArchivo extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

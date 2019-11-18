@@ -33,8 +33,6 @@ public class EDDP2 {
     
     
     public static void main(String[] args) {
-        tabla.agregar("micky", SHA256("12345678"));
-        tabla.agregar("micky1", SHA256("12345678"));
         new Inicio();
         
     }

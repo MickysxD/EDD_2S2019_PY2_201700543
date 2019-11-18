@@ -26,8 +26,6 @@ public class Inicio extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
         
-        nombre.setText("micky");
-        pass.setText("12345678");
     }
 
     public String SHA256(String password) {
