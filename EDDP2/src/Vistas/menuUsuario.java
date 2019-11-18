@@ -404,7 +404,7 @@ public class menuUsuario extends javax.swing.JFrame {
                 AVL ag = matriz.getArchivos();
                 
                 while (linea != null) {
-                    String lineat[] = linea.split(",");
+                    String lineat[] = linea.split(",",2);
                     if (lineat.length == 2) {
                         ag.agregar(new NodoAVL(lineat[0],lineat[1].replace("\"", ""),EDDP2.actual.getNombre()));
                         si++;
