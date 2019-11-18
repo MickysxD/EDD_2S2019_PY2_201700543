@@ -1,0 +1,9 @@
+digraph grafico{
+graph [pad="0.5", nodesep="0.5", ranksep="2"];
+node [shape=plain]
+rankdir=LR;
+Foo [label=<
+<table border="0" cellborder="1" cellspacing="0">
+<tr><td><i><b>No.</b></i></td><td><i><b>Usuario</b></i></td><td><i><b>Operacion</b></i></td><td><i><b>Time</b></i></td></tr>
+</table>>];
+}

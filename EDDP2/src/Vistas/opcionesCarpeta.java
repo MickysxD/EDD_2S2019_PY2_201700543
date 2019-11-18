@@ -129,6 +129,7 @@ public class opcionesCarpeta extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         boolean p = EDDP2.matriz.eliminarCarpeta(EDDP2.padre, EDDP2.carpetaC.getNombre());
         if (p) {
+            EDDP2.bitacora.meter(new NodoPila("Carpeta eliminada: "+EDDP2.carpetaC.getNombre(),EDDP2.actual.getNombre()));
             JOptionPane.showMessageDialog(null, "Carpeta eliminada", "Exito", JOptionPane.INFORMATION_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(null, "ERROR: no se pudo eliminar", "Error", JOptionPane.INFORMATION_MESSAGE);
@@ -140,6 +141,7 @@ public class opcionesCarpeta extends javax.swing.JFrame {
         if (!nombre.getText().equals("")) {
             boolean p = EDDP2.matriz.modificarCarpeta(EDDP2.padre, EDDP2.carpetaC.getNombre(), nombre.getText());
             if (p) {
+                EDDP2.bitacora.meter(new NodoPila("Carpeta modificada: "+EDDP2.carpetaC.getNombre(),EDDP2.actual.getNombre()));
                 JOptionPane.showMessageDialog(null, "Carpeta modificada", "Exito", JOptionPane.INFORMATION_MESSAGE);
             } else {
                 JOptionPane.showMessageDialog(null, "ERROR: no se pudo modificar", "Error", JOptionPane.INFORMATION_MESSAGE);
