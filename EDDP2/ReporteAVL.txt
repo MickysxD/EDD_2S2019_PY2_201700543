@@ -2,5 +2,23 @@ digraph grafico{
 graph [nodesep=2];
 node [shape=record]
 rankdir=TB;
-"asdf.c"[label= "Nombre: asdf.c\nNontenido: \nAltura: 1\nFactor: 0\nTime: 2019-11-17 23:40:00.522\nPropietario: micky"];
+"micky"[label= "<C0>| Nombre: micky\nNontenido: 12345678\nAltura: 4\nFactor: 1\nTime: 2019-11-18 00:40:55.927\nPropietario: micky|<C1>"];
+"esta.qlero"[label= "<C0>| Nombre: esta.qlero\nNontenido: Ya\nAltura: 2\nFactor: 1\nTime: 2019-11-18 00:41:03.561\nPropietario: micky|<C1>"];
+"jeje.jajas"[label= "Nombre: jeje.jajas\nNontenido: sino\nAltura: 1\nFactor: 0\nTime: 2019-11-18 00:41:03.561\nPropietario: micky"];
+"esta.qlero":C1->"jeje.jajas";
+{rank=same; "jeje.jajas" }
+"micky":C0->"esta.qlero";
+"micky2"[label= "<C0>| Nombre: micky2\nNontenido: 12345678\nAltura: 3\nFactor: 1\nTime: 2019-11-18 00:40:55.927\nPropietario: micky|<C1>"];
+"micky1"[label= "Nombre: micky1\nNontenido: 12345678\nAltura: 1\nFactor: 0\nTime: 2019-11-18 00:40:55.927\nPropietario: micky"];
+"micky2":C0->"micky1";
+"my.p"[label= "<C0>| Nombre: my.p\nNontenido: Holaputito\nAltura: 2\nFactor: 0\nTime: 2019-11-18 00:41:03.56\nPropietario: micky|<C1>"];
+"micky3"[label= "Nombre: micky3\nNontenido: 12345678\nAltura: 1\nFactor: 0\nTime: 2019-11-18 00:40:55.927\nPropietario: micky"];
+"my.p":C0->"micky3";
+"qlo.sino"[label= "Nombre: qlo.sino\nNontenido: sta\nAltura: 1\nFactor: 0\nTime: 2019-11-18 00:41:03.561\nPropietario: micky"];
+"my.p":C1->"qlo.sino";
+{rank=same; "micky3" "qlo.sino" }
+"micky2":C1->"my.p";
+{rank=same; "micky1" "my.p" }
+"micky":C1->"micky2";
+{rank=same; "esta.qlero" "micky2" }
 }

@@ -45,10 +45,31 @@ public class AVL {
             this.total += 1;
         } else {
             agregarAVL(this.root, nuevo);
+            actualizar(this.root);
             this.total += 1;
         }
     }
 
+    public void actualizar(NodoAVL root){
+        
+        if(root.getIzq() != null){
+            actualizar(root.getIzq());
+        }
+        
+        if(root.getDer() != null){
+            actualizar(root.getDer());
+        }
+        
+        if (root.getIzq() == null && root.getDer() != null) {
+            root.setAltura(altura(root.getDer()) + 1);
+        } else if (root.getIzq() != null && root.getDer() == null) {
+            root.setAltura(altura(root.getIzq()) + 1);
+        } else {
+            root.setAltura(Math.max(altura(root.getIzq()), altura(root.getDer())) + 1);
+        }
+        
+    }
+    
     public NodoAVL rotacionI(NodoAVL root) {
         NodoAVL aux = root.getIzq();
         root.setIzq(aux.getDer());
@@ -115,18 +136,16 @@ public class AVL {
                 }
             }
         } else {
-            System.out.println("Nodo duplicado");
+            root.setNombre(nuevo.getNombre());
+            root.setContenido(nuevo.getContenido());
         }
 
         if (root.getIzq() == null && root.getDer() != null) {
             root.setFactor(root.getDer().getFactor() + 1);
-            root.setAltura(altura(root.getDer()) + 1);
         } else if (root.getIzq() != null && root.getDer() == null) {
             root.setFactor(root.getIzq().getFactor() + 1);
-            root.setAltura(altura(root.getIzq()) + 1);
         } else {
             root.setFactor(Math.max(factor(root.getIzq()), factor(root.getDer())) + 1);
-            root.setAltura(Math.max(altura(root.getIzq()), altura(root.getDer())) + 1);
         }
 
         this.root = padre;
