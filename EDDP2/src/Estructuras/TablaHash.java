@@ -141,12 +141,12 @@ public class TablaHash {
             pw = new PrintWriter(fichero);
 
             pw.write("digraph grafico{\ngraph [pad=\"0.5\", nodesep=\"0.5\", ranksep=\"2\"];\nnode [shape=plain]\nrankdir=LR;\n");
-            pw.append("Foo [label=<\n<table border=\"0\" cellborder=\"1\" cellspacing=\"0\">\n<tr><td><i><b>No.</b></i></td><td><i><b>Usuario</b></i></td></tr>\n");
+            pw.append("Foo [label=<\n<table border=\"0\" cellborder=\"1\" cellspacing=\"0\">\n<tr><td><i><b>No.</b></i></td><td><i><b>Usuario</b></i></td></td><td><i><b>Pass</b></i></td></td><td><i><b>Time</b></i></td></tr>\n");
             int tam = uso;
 
             for (int i = 0; i < usuarios.length; i++) {
                 if (usuarios[i] != null && tam > 0) {
-                    pw.append("<tr><td><b>"+i+".</b></td><td><b>Usuario:</b> " + usuarios[i].getNombre() + " <b>Pass:</b> " + usuarios[i].getPass() + " <b>Time:</b> " + usuarios[i].getTime() + "</td></tr>\n");
+                    pw.append("<tr><td><b>"+i+".</b></td><td>" + usuarios[i].getNombre() + "</td><td>" + usuarios[i].getPass() + "</td><td>" + usuarios[i].getTime() + "</td></tr>\n");
                     tam -= 1;
                 }else{
                     pw.append("<tr><td><b>"+i+".</b></td><td></td></tr>\n");
@@ -200,7 +200,7 @@ public class TablaHash {
 
     public Usuario buscar(String nombre){
         for (int i = 0; i < usuarios.length; i++) {
-            if(usuarios[i].getNombre().equals(nombre)){
+            if(usuarios[i] != null && usuarios[i].getNombre().equals(nombre)){
                 return usuarios[i];
             }
         }

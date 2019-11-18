@@ -6,7 +6,16 @@
 package Vistas;
 
 import eddp2.*;
+import Estructuras.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -14,10 +23,8 @@ import javax.swing.JOptionPane;
  */
 public class menuAdmin extends javax.swing.JFrame {
 
-    /**
-     * Creates new form menuAdmin
-     */
     boolean tabla = false;
+    Pila pila = new Pila();
 
     public menuAdmin() {
         initComponents();
@@ -40,8 +47,7 @@ public class menuAdmin extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        dir = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
+        jButton5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -85,7 +91,12 @@ public class menuAdmin extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Direccion del archivo");
+        jButton5.setText("No agregados");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -99,19 +110,18 @@ public class menuAdmin extends javax.swing.JFrame {
                         .addGap(54, 54, 54)
                         .addComponent(jButton3))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(dir))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(12, 12, 12)
-                                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jButton2))))))
+                                .addGap(30, 30, 30)
+                                .addComponent(jButton1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jButton5)
+                                .addGap(42, 42, 42)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton2)
+                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -121,18 +131,14 @@ public class menuAdmin extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(jButton3))
-                .addGap(2, 2, 2)
-                .addComponent(jLabel2)
-                .addGap(1, 1, 1)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton4))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(dir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)))
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton4)
+                    .addComponent(jButton5))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
 
@@ -159,12 +165,112 @@ public class menuAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+
+        try {
+            File guardado;
+            FileReader read;
+            BufferedReader buff;
+            JFileChooser file = new JFileChooser();
+            FileNameExtensionFilter filtro = new FileNameExtensionFilter("Archivos csv", "csv");
+            file.setFileFilter(filtro);
+            file.showOpenDialog(file);
+
+            if (file.getSelectedFile() != null) {
+
+                String temp = file.getSelectedFile().getAbsolutePath();
+
+                guardado = new File(temp);
+                read = new FileReader(guardado);
+                buff = new BufferedReader(read);
+
+                //CSVReader csvReader = new CSVReader(read);
+                String linea = buff.readLine();
+                int no = 0;
+                int si = 0;
+
+                linea = buff.readLine();
+
+                while (linea != null) {
+                    String lineat[] = linea.split(",");
+                    if (lineat.length == 2) {
+                        Usuario us = EDDP2.tabla.buscar(lineat[0]);
+                        if (us == null && lineat[1].length() >= 8) {
+                            boolean p = EDDP2.tabla.agregar(lineat[0], EDDP2.SHA256(lineat[1]));
+                            if (p) {
+                                si++;
+                            }
+                        } else {
+                            if (us != null) {
+                                pila.meter(new NodoPila("Usuario ya existe", lineat[0]));
+                            } else {
+                                pila.meter(new NodoPila("La pass no cumple", lineat[0]));
+                            }
+                            no++;
+                        }
+
+                    }
+
+                    linea = buff.readLine();
+
+                }
+                read.close();
+                buff.close();
+                JOptionPane.showMessageDialog(null, "Usuarios agregados: " + si + "\nUsuarios no agregados: " + no, "Exito", JOptionPane.INFORMATION_MESSAGE);
+                graficarNo();
+                tabla = true;
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Archivo no valido, intente con otro", "Error", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        if (tabla) {
+            EDDP2.imagen = "ReporteNo.jpg";
+            new mostrarReportes();
+        } else {
+            JOptionPane.showMessageDialog(null, "No a cargado algun archivo", "Error", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    public void graficarNo() {
+        FileWriter fichero;
+        PrintWriter pw;
+        try {
+            fichero = new FileWriter("ReporteNo.txt");
+            pw = new PrintWriter(fichero);
+
+            pw.write("digraph grafico{\ngraph [pad=\"0.5\", nodesep=\"0.5\", ranksep=\"2\"];\nnode [shape=plain]\nrankdir=LR;\n");
+            pw.append("Foo [label=<\n<table border=\"0\" cellborder=\"1\" cellspacing=\"0\">\n<tr><td><i><b>No.</b></i></td><td><i><b>Usuario</b></i></td><td><i><b>Error</b></i></td><td><i><b>Time</b></i></td></tr>\n");
+
+            NodoPila temp = pila.getCima();
+            int i = 0;
+
+            while (temp != null) {
+
+                pw.append("<tr><td><b>" + i + ".</b></td><td>" + temp.getUsuario() + " </td><td>" + temp.getOperacion() + " </td><td>" + temp.getTime() + "</td></tr>\n");
+                temp = temp.getAbajo();
+                i++;
+
+            }
+
+            pw.append("</table>>];\n}");
+
+            pw.close();
+
+            try {
+                Runtime.getRuntime().exec("dot -Tjpg ReporteNo.txt -o ReporteNo.jpg");
+                //Runtime.getRuntime().exec("cmd /c start ReporteUsuarios.dot");
+                //Runtime.getRuntime().exec("cmd /c start ReporteUsuarios.jpg");
+            } catch (IOException ioe) {
+                System.out.println(ioe);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -198,12 +304,11 @@ public class menuAdmin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField dir;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }

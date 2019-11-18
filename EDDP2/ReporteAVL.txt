@@ -2,8 +2,10 @@ digraph grafico{
 graph [nodesep=2];
 node [shape=record]
 rankdir=TB;
-"a.a"[label= "<C0>| Nombre: a.a\nNontenido: \nAltura: 2\nFactor: 1\nTime: 2019-11-17 17:35:27.962\nPropietario: micky|<C1>"];
-"aa.a"[label= "Nombre: aa.a\nNontenido: \nAltura: 1\nFactor: 0\nTime: 2019-11-17 17:35:58.537\nPropietario: micky"];
-"a.a":C1->"aa.a";
-{rank=same; "aa.a" }
+"b.b"[label= "<C0>| Nombre: b.b\nNontenido: \nAltura: 0\nFactor: -1\nTime: 2019-11-17 20:16:34.247\nPropietario: micky|<C1>"];
+"a.a"[label= "Nombre: a.a\nNontenido: \nAltura: 0\nFactor: -1\nTime: 2019-11-17 20:16:29.055\nPropietario: micky"];
+"b.b":C0->"a.a";
+"c.c"[label= "Nombre: c.c\nNontenido: \nAltura: 1\nFactor: 0\nTime: 2019-11-17 20:16:22.568\nPropietario: micky"];
+"b.b":C1->"c.c";
+{rank=same; "a.a" "c.c" }
 }

@@ -202,9 +202,9 @@ public class AVL {
 
     public void editarR(AVL nuevo, NodoAVL root, String nombre, String n, String contenido) {
         if (root.getNombre().equals(nombre)) {
-            root.setNombre(n);
-            root.setContenido(contenido);
-            nuevo.agregar(root);
+            NodoAVL nn = new NodoAVL(n, contenido, root.getPropietario());
+            nn.setTime(root.getTime());
+            nuevo.agregar(nn);
         } else {
             nuevo.agregar(root);
         }

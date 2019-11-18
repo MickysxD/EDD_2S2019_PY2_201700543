@@ -29,6 +29,7 @@ public class EDDP2 {
     public static NodoAVL archivoM = null;
     public static NodoAVL archivos[] = null;
     public static String imagen = "";
+    public static Pila bitacora = new Pila();
     
     
     public static void main(String[] args) {
