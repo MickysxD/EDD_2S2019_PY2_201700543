@@ -106,7 +106,7 @@ public class AVL {
             } else {
                 root.setDer(agregarAVL(root.getDer(), nuevo));
                 if (factor(root.getDer()) - factor(root.getIzq()) == 2) {
-                    int maxx = root.getIzq().getNombre().compareTo(nuevo.getNombre());
+                    int maxx = root.getDer().getNombre().compareTo(nuevo.getNombre());
                     if (maxx < 0) {
                         padre = rotacionD(root);
                     } else {
@@ -146,6 +146,7 @@ public class AVL {
         for (int i = 0; i < array.length; i++) {
             if (array[i] == null) {
                 array[i] = root;
+                break;
             }
         }
 
@@ -161,19 +162,22 @@ public class AVL {
         if (total == 1 && this.root.getNombre().equals(nombre)) {
             this.root = nuevo.getRoot();
             this.total = nuevo.getTotal();
+            return true;
         } else {
             eliminarR(nuevo, this.root, nombre);
 
             this.root = nuevo.getRoot();
             this.total = nuevo.getTotal();
+            return true;
         }
 
-        return true;
     }
 
     public void eliminarR(AVL nuevo, NodoAVL root, String nombre) {
         if (!root.getNombre().equals(nombre)) {
-            nuevo.agregar(root);
+            NodoAVL tn = new NodoAVL(root.getNombre(), root.getContenido(), root.getPropietario());
+            tn.setTime(root.getTime());
+            nuevo.agregar(tn);
         }
 
         if (root.getIzq() != null) {
@@ -256,8 +260,12 @@ public class AVL {
             pw.write("digraph grafico{\ngraph [nodesep=2];\nnode [shape=record]\nrankdir=TB;\n");
 
             //Creacion de nodos
-            String datos = g(this.root);
-            pw.append(datos);
+            
+            if(this.root != null){
+                String datos = g(this.root);
+                pw.append(datos);
+            }
+            
             
             //Union de nodos
             

@@ -19,6 +19,7 @@ public class Matriz {
         this.root = new NodoMatriz("root", "root", null, null);
         this.root.setAbajo(new NodoMatriz("/", "/", null, null));
         this.root.setSiguiente(new NodoMatriz("/", "/", null, null));
+        agregarCarpeta(root.getAbajo(), "Compartidos");
     }
 
     public NodoMatriz buscarSub(String ruta) {
@@ -86,37 +87,36 @@ public class Matriz {
         boolean bandera = false;
         boolean entra = false;
 
-        if (temp.getSiguiente() != null) {
+        while (temp.getSiguiente() != null) {
             temp = temp.getSiguiente();
-            while (entra) {
-                int pos = temp.getNombre().compareTo(hijo.getNombre());
-
-                if (pos == 0) {
-                    return null;
-                } else if (pos == 1) {
-                    bandera = true;
-                    entra = false;
-                } else if (temp.getSiguiente() != null) {
-                    temp = temp.getSiguiente();
-                } else {
-                    entra = false;
-                }
-            }
+//            while (entra) {
+//                int pos = temp.getNombre().compareTo(hijo.getNombre());
+//
+//                if (pos == 0) {
+//                    return null;
+//                } else if (pos == 1) {
+//                    bandera = true;
+//                    entra = false;
+//                } else if (temp.getSiguiente() != null) {
+//                    temp = temp.getSiguiente();
+//                } else {
+//                    entra = false;
+//                }
+//            }
         }
 
-//        temp.setSiguiente(nuevo);
-//        nuevo.setAnterior(temp);
-        
-        if (bandera) {
-            nuevo.setSiguiente(temp);
-            temp.getAnterior().setSiguiente(nuevo);
-            nuevo.setAnterior(temp.getAnterior());
-            temp.setAnterior(nuevo);
-        } else {
-            temp.setSiguiente(nuevo);
-            nuevo.setAnterior(temp);
-        }
+        temp.setSiguiente(nuevo);
+        nuevo.setAnterior(temp);
 
+//        if (bandera) {
+//            nuevo.setSiguiente(temp);
+//            temp.getAnterior().setSiguiente(nuevo);
+//            nuevo.setAnterior(temp.getAnterior());
+//            temp.setAnterior(nuevo);
+//        } else {
+//            temp.setSiguiente(nuevo);
+//            nuevo.setAnterior(temp);
+//        }
         return nuevo;
     }
 
@@ -152,7 +152,7 @@ public class Matriz {
             }
             NodoMatriz hijo = agregarPadreHijo(padre, nuevo);
             agregarSubHijo(hijo, sub);
-            padre.setCarpetas(padre.getCarpetas()+1);
+            padre.setCarpetas(padre.getCarpetas() + 1);
             return true;
         } else {
             return false;
@@ -176,20 +176,20 @@ public class Matriz {
             } else {
                 sub = buscarSub(padre.getRuta() + "/" + nombre);
                 pad = buscarPadre(padre.getRuta() + "/" + nombre);
-                
+
                 pad.setRuta(padre.getRuta() + "/" + nuevo);
                 sub.setRuta(padre.getRuta() + "/" + nuevo);
                 hijo.setRuta(padre.getRuta() + "/" + nuevo);
             }
-            
+
             hijo.setNombre(nuevo);
             pad.setNombre(nuevo);
             sub.setNombre(nuevo);
-            
-            if(pad.getSiguiente() != null){
+
+            if (pad.getSiguiente() != null) {
                 modificarRutas(pad);
             }
-            
+
         } else {
             return false;
         }
@@ -197,20 +197,20 @@ public class Matriz {
         return true;
     }
 
-    public void modificarRutas(NodoMatriz padre){
+    public void modificarRutas(NodoMatriz padre) {
         NodoMatriz temp = padre.getSiguiente();
-        while(temp != null){
-            if(temp.getMismo().getSiguiente() != null){
-                temp.getMismo().setRuta(padre.getRuta()+"/"+temp.getMismo().getNombre());
+        while (temp != null) {
+            if (temp.getMismo().getSiguiente() != null) {
+                temp.getMismo().setRuta(padre.getRuta() + "/" + temp.getMismo().getNombre());
                 modificarRutas(temp.getMismo());
-            }else{
-                temp.getMismo().setRuta(padre.getRuta()+"/"+temp.getMismo().getNombre());
+            } else {
+                temp.getMismo().setRuta(padre.getRuta() + "/" + temp.getMismo().getNombre());
             }
             temp = temp.getSiguiente();
         }
-    
+
     }
-    
+
     public boolean eliminarCarpeta(NodoMatriz padre, String nombre) {
         NodoMatriz sub;
         NodoMatriz mismo;
@@ -387,9 +387,53 @@ public class Matriz {
             } catch (IOException ioe) {
                 System.out.println(ioe);
             }
-            
+
             return true;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+
+    }
+
+    public boolean graficarGrafo() {
+        FileWriter fichero;
+        PrintWriter pw;
+        try {
+            fichero = new FileWriter("ReporteGrafo.txt");
+            pw = new PrintWriter(fichero);
+
+            pw.write("digraph grafico{\ngraph [nodesep=2];\nnode [shape=record]\nrankdir=TB;\n");
+            NodoMatriz tempS;
+            NodoMatriz tempP = this.root.getAbajo();
+
+            //Creacion de nodos y union
             
+            while(tempP != null){
+                tempS = tempP.getSiguiente();
+                while(tempS != null){
+                    pw.append("\"" + tempS.getRuta() + "\"[label=\"" + tempS.getNombre() + "\"];\n");
+                    pw.append("\"" + tempP.getRuta() + "\"->\"" + tempS.getRuta() + "\";\n");
+                    tempS = tempS.getSiguiente();
+                }
+                tempP = tempP.getAbajo();
+            }
+            
+            pw.append("}");
+
+            pw.close();
+
+            try {
+                Runtime.getRuntime().exec("dot -Tjpg ReporteGrafo.txt -o ReporteGrafo.jpg");
+                //Runtime.getRuntime().exec("cmd /c start ReporteUsuarios.dot");
+                //Runtime.getRuntime().exec("cmd /c start ReporteUsuarios.jpg");
+            } catch (IOException ioe) {
+                System.out.println(ioe);
+            }
+
+            return true;
+
         } catch (Exception e) {
             e.printStackTrace();
             return false;

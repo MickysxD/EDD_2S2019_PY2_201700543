@@ -34,18 +34,6 @@ public class EDDP2 {
     public static void main(String[] args) {
         tabla.agregar("micky", SHA256("12345678"));
         tabla.agregar("micky1", SHA256("12345678"));
-        tabla.agregar("micky2", SHA256("12345678"));
-        tabla.getUsuarios()[0].getArchivos().getRoot().getAbajo().getArchivos().agregar(new NodoAVL("archivo.prueba","este archivo es de prueba",tabla.getUsuarios()[0].getNombre()));
-        tabla.getUsuarios()[0].getArchivos().agregarCarpeta(EDDP2.tabla.getUsuarios()[0].getArchivos().getRoot().getAbajo(), "prueba");
-        tabla.getUsuarios()[0].getArchivos().agregarCarpeta(EDDP2.tabla.getUsuarios()[0].getArchivos().getRoot().getAbajo(), "nueva");
-        tabla.getUsuarios()[0].getArchivos().agregarCarpeta(EDDP2.tabla.getUsuarios()[0].getArchivos().getRoot().getAbajo(), "qp2");
-        tabla.getUsuarios()[0].getArchivos().agregarCarpeta(EDDP2.tabla.getUsuarios()[0].getArchivos().getRoot().getAbajo().getAbajo(), "dentro de prueba");
-        tabla.getUsuarios()[0].getArchivos().agregarCarpeta(EDDP2.tabla.getUsuarios()[0].getArchivos().getRoot().getAbajo().getAbajo(), "dentro de prueba 2");
-        tabla.getUsuarios()[0].getArchivos().agregarCarpeta(EDDP2.tabla.getUsuarios()[0].getArchivos().getRoot().getAbajo().getAbajo().getAbajo(), "dentro de nueva");
-//        EDDP2.tabla.getUsuarios()[0].getArchivos().eliminarCarpeta(EDDP2.tabla.getUsuarios()[0].getArchivos().getRoot().getAbajo(), "prueba");
-//        EDDP2.tabla.getUsuarios()[0].getArchivos().modificarCarpeta(EDDP2.tabla.getUsuarios()[0].getArchivos().getRoot().getAbajo(), "nueva", "modificada");
-//        EDDP2.tabla.getUsuarios()[0].getArchivos().graficarMatriz();
-        //EDDP2.tabla.graficar();
         new Inicio();
         
     }

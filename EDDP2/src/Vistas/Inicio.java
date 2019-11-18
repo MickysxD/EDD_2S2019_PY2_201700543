@@ -26,7 +26,7 @@ public class Inicio extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
         
-        nombre.setText("micky1");
+        nombre.setText("micky");
         pass.setText("12345678");
     }
 

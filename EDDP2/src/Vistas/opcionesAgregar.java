@@ -45,7 +45,7 @@ public class opcionesAgregar extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         nombrec = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/agregara.png"))); // NOI18N
         jButton1.setText("Agregar archivo");
@@ -154,14 +154,16 @@ public class opcionesAgregar extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         NodoAVL array[] = EDDP2.padre.getArchivos().getArray();
         boolean b = false;
-
-        if (array != null) {
+        
+        int m = nombrea.getText().indexOf(".");
+        if(m != -1){
+            if (array != null) {
             for (int i = 0; i < array.length; i++) {
                 if (array[i].getNombre().equals(nombrea.getText())) {
                     b = true;
                 }
             }
-
+            
             if (!b) {
                 EDDP2.padre.getArchivos().agregar(new NodoAVL(nombrea.getText(), contenido.getText(), EDDP2.actual.getNombre()));
                 JOptionPane.showMessageDialog(null, "Archivo agregado con exito", "Exito", JOptionPane.INFORMATION_MESSAGE);
@@ -175,6 +177,10 @@ public class opcionesAgregar extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Archivo agregado con exito", "Exito", JOptionPane.INFORMATION_MESSAGE);
             dispose();
         }
+        }else {
+                JOptionPane.showMessageDialog(null, "Nombre de archivo no tiene extencion", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+            }
+        
 
     }//GEN-LAST:event_jButton1ActionPerformed
 

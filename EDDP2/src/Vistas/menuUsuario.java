@@ -33,6 +33,7 @@ public class menuUsuario extends javax.swing.JFrame {
     JLabel datos[][];
     boolean carpeta = false;
     boolean archivo = false;
+    boolean grafo = false;
 
     public menuUsuario() {
         initComponents();
@@ -41,13 +42,19 @@ public class menuUsuario extends javax.swing.JFrame {
         setVisible(true);
         ruta.setText("Ruta actual: " + matriz.getRuta());
         usuario.setText("Usuario: " + actual.getNombre());
+        
         agregarVistas();
-
+        
         panel.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                EDDP2.padre = matriz;
-                new opcionesAgregar();
+                if (e.getButton() == MouseEvent.BUTTON3) {
+                    EDDP2.padre = matriz;
+                    new opcionesAgregar();
+
+                    System.out.println("click derecho");;
+                }
+
             }
 
             @Override
@@ -100,6 +107,8 @@ public class menuUsuario extends javax.swing.JFrame {
         gc = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
 
         jMenu1.setText("jMenu1");
 
@@ -165,31 +174,45 @@ public class menuUsuario extends javax.swing.JFrame {
             }
         });
 
-        ga.setText("Generar reporte de archivos");
+        ga.setText("Generar reporte AVL");
         ga.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 gaActionPerformed(evt);
             }
         });
 
-        gc.setText("Generar reporte de carpetas");
+        gc.setText("Generar reporte Matriz");
         gc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 gcActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Ver reporte de archivos");
+        jButton2.setText("Ver reporte AVL");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Ver reporte de carpetas");
+        jButton3.setText("Ver reporte Matriz");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setText("Generar reporte Grafo");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        jButton5.setText("Ver reporte Grafo");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
             }
         });
 
@@ -221,6 +244,12 @@ public class menuUsuario extends javax.swing.JFrame {
                                 .addComponent(jButton2)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton4)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addComponent(jButton5)))
+                        .addGap(138, 138, 138)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(gc)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(12, 12, 12)
@@ -247,11 +276,13 @@ public class menuUsuario extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ga)
-                    .addComponent(gc))
+                    .addComponent(gc)
+                    .addComponent(jButton4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(jButton3)
+                    .addComponent(jButton5))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
@@ -275,10 +306,16 @@ public class menuUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_ActualizarActionPerformed
 
     private void gaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gaActionPerformed
-        archivo = matriz.getArchivos().graficar();
-        if (archivo) {
-            JOptionPane.showMessageDialog(null, "Reporte de archivos realizado", "Exito", JOptionPane.INFORMATION_MESSAGE);
+        if (matriz.getArchivos().getRoot() != null) {
+            archivo = matriz.getArchivos().graficar();
+            if (archivo) {
+                JOptionPane.showMessageDialog(null, "Reporte de archivos realizado", "Exito", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "No hay archivos", "ERROR", JOptionPane.INFORMATION_MESSAGE);
         }
+
+
     }//GEN-LAST:event_gaActionPerformed
 
     private void gcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gcActionPerformed
@@ -286,14 +323,13 @@ public class menuUsuario extends javax.swing.JFrame {
         if (carpeta) {
             JOptionPane.showMessageDialog(null, "Reporte de carpetas realizado", "Exito", JOptionPane.INFORMATION_MESSAGE);
         }
-
     }//GEN-LAST:event_gcActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         if (archivo) {
             EDDP2.imagen = "ReporteAVL.jpg";
             new mostrarReportes();
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Error: Realize el reporte de archivos", "Error", JOptionPane.INFORMATION_MESSAGE);
         }
 
@@ -303,10 +339,26 @@ public class menuUsuario extends javax.swing.JFrame {
         if (carpeta) {
             EDDP2.imagen = "ReporteMatriz.jpg";
             new mostrarReportes();
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Error: Realize el reporte de archivos", "Error", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        grafo = m.graficarGrafo();
+        if (carpeta) {
+            JOptionPane.showMessageDialog(null, "Reporte de grafo realizado", "Exito", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        if (grafo) {
+            EDDP2.imagen = "ReporteGrafo.jpg";
+            new mostrarReportes();
+        } else {
+            JOptionPane.showMessageDialog(null, "Error: Realize el reporte de archivos", "Error", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -351,15 +403,15 @@ public class menuUsuario extends javax.swing.JFrame {
         ruta.setText(matriz.getRuta());
 
         if (size != 0) {
-            datos = new JLabel[(size / 5) + 1][5];
+            datos = new JLabel[(size / 6) + 1][6];
 
             NodoMatriz temp = matriz.getSiguiente();
             NodoAVL array[] = matriz.getArchivos().getArray();
 
             int a = 0;
 
-            for (int i = 0; i < (size / 5) + 1; i++) {
-                for (int j = 0; j < 5; j++) {
+            for (int i = 0; i < (size / 6) + 1; i++) {
+                for (int j = 0; j < 6; j++) {
                     if (temp != null) {
                         JLabel nuevo = new JLabel();
                         nuevo.setBounds(5 + (105 * j), 5 + (105 * i), 100, 100);
@@ -455,7 +507,7 @@ public class menuUsuario extends javax.swing.JFrame {
                                         }
                                     }
                                     new opcionesArchivo();
-
+                                    
                                     System.out.println("click derecho");;
                                 }
                             }
@@ -569,6 +621,8 @@ public class menuUsuario extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;

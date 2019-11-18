@@ -26,7 +26,7 @@ public class opcionesArchivo extends javax.swing.JFrame {
         n.setText("Archivo: " + EDDP2.archivoM.getNombre());
         nombre.setText(EDDP2.archivoM.getNombre());
         contenido.setText(EDDP2.archivoM.getContenido());
-        time.setText("Time: "+EDDP2.archivoM.getTime());
+        time.setText("Time: " + EDDP2.archivoM.getTime());
     }
 
     /**
@@ -52,7 +52,7 @@ public class opcionesArchivo extends javax.swing.JFrame {
         usuario = new javax.swing.JTextField();
         time = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/eliminar.png"))); // NOI18N
         jButton1.setText("Eliminar archivo");
@@ -91,6 +91,11 @@ public class opcionesArchivo extends javax.swing.JFrame {
         jButton3.setText("Compartir");
         jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         contenido.setColumns(20);
         contenido.setRows(5);
@@ -182,28 +187,34 @@ public class opcionesArchivo extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "ERROR: no se pudo eliminar", "Error", JOptionPane.INFORMATION_MESSAGE);
         }
+    
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         if (!nombre.getText().equals("")) {
-            boolean t = false;
-            for (int i = 0; i < EDDP2.archivos.length; i++) {
-                if (EDDP2.archivos[i] != EDDP2.archivoM && EDDP2.archivos[i].getNombre().equals(nombre.getText())) {
-                    t = true;
+            int m = nombre.getText().indexOf(".");
+            if (m != -1) {
+                boolean t = false;
+                for (int i = 0; i < EDDP2.archivos.length; i++) {
+                    if (EDDP2.archivos[i] != EDDP2.archivoM && EDDP2.archivos[i].getNombre().equals(nombre.getText())) {
+                        t = true;
+                    }
                 }
-            }
 
-            if (!t) {
-                boolean p = EDDP2.padre.getArchivos().editar(EDDP2.archivoM.getNombre(), nombre.getText(), contenido.getText());
-                if (p) {
-                    JOptionPane.showMessageDialog(null, "Archivo modificado", "Exito", JOptionPane.INFORMATION_MESSAGE);
-                    dispose();
+                if (!t) {
+                    boolean p = EDDP2.padre.getArchivos().editar(EDDP2.archivoM.getNombre(), nombre.getText(), contenido.getText());
+                    if (p) {
+                        JOptionPane.showMessageDialog(null, "Archivo modificado", "Exito", JOptionPane.INFORMATION_MESSAGE);
+                        dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "ERROR: no se pudo modificar", "Error", JOptionPane.INFORMATION_MESSAGE);
+                    }
                 } else {
-                    JOptionPane.showMessageDialog(null, "ERROR: no se pudo modificar", "Error", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "ERROR: el nombre ya existe", "Error", JOptionPane.INFORMATION_MESSAGE);
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "ERROR: el nombre ya existe", "Error", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "ERROR: el nombre no tiene extencion", "Error", JOptionPane.INFORMATION_MESSAGE);
             }
 
         } else {
@@ -215,6 +226,34 @@ public class opcionesArchivo extends javax.swing.JFrame {
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
         dispose();
     }//GEN-LAST:event_jToggleButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        Usuario us = EDDP2.tabla.buscar(usuario.getText());
+        NodoAVL temp[] = us.getArchivos().getRoot().getAbajo().getAbajo().getArchivos().getArray();
+        boolean t = true;
+
+        if (temp != null) {
+            for (int i = 0; i < temp.length; i++) {
+                if (temp[i].getNombre().equals(EDDP2.archivoM.getNombre())) {
+                    t = false;
+                }
+            }
+        }
+
+        if (t) {
+            if (us != null) {
+                us.getArchivos().getRoot().getAbajo().getAbajo().getArchivos().agregar(new NodoAVL(EDDP2.archivoM.getNombre(), EDDP2.archivoM.getContenido(), us.getNombre()));
+                JOptionPane.showMessageDialog(null, "Archivo compartido con exito", "Exito", JOptionPane.INFORMATION_MESSAGE);
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, "ERROR: nombre de usuario no existe", "Error", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "ERROR: nombre de archivo ya existe en el destino", "Error", JOptionPane.INFORMATION_MESSAGE);
+        }
+
+
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments

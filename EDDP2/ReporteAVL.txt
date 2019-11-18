@@ -2,5 +2,8 @@ digraph grafico{
 graph [nodesep=2];
 node [shape=record]
 rankdir=TB;
-"archivo.prueba"[label= "Nombre: archivo.prueba\nNontenido: este archivo es de prueba\nAltura: 1\nFactor: 0\nTime: 2019-11-17 13:42:05.498\nPropietario: micky1"];
+"a.a"[label= "<C0>| Nombre: a.a\nNontenido: \nAltura: 2\nFactor: 1\nTime: 2019-11-17 17:35:27.962\nPropietario: micky|<C1>"];
+"aa.a"[label= "Nombre: aa.a\nNontenido: \nAltura: 1\nFactor: 0\nTime: 2019-11-17 17:35:58.537\nPropietario: micky"];
+"a.a":C1->"aa.a";
+{rank=same; "aa.a" }
 }

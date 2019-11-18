@@ -122,6 +122,14 @@
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jButton4" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
+                              <Component id="jButton5" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace min="-2" pref="138" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="gc" min="-2" max="-2" attributes="0"/>
                           <Group type="102" attributes="0">
                               <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
@@ -159,11 +167,13 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="ga" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="gc" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButton4" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jButton3" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButton5" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="17" max="32767" attributes="0"/>
           </Group>
@@ -249,7 +259,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="ga">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Generar reporte de archivos"/>
+        <Property name="text" type="java.lang.String" value="Generar reporte AVL"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="gaActionPerformed"/>
@@ -257,7 +267,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="gc">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Generar reporte de carpetas"/>
+        <Property name="text" type="java.lang.String" value="Generar reporte Matriz"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="gcActionPerformed"/>
@@ -265,7 +275,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButton2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Ver reporte de archivos"/>
+        <Property name="text" type="java.lang.String" value="Ver reporte AVL"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
@@ -273,10 +283,26 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButton3">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Ver reporte de carpetas"/>
+        <Property name="text" type="java.lang.String" value="Ver reporte Matriz"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButton4">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Generar reporte Grafo"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton4ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButton5">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Ver reporte Grafo"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton5ActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

@@ -197,6 +197,15 @@ public class TablaHash {
         return null;
     }
 
+    public Usuario buscar(String nombre){
+        for (int i = 0; i < usuarios.length; i++) {
+            if(usuarios[i].getNombre().equals(nombre)){
+                return usuarios[i];
+            }
+        }
+        return null;
+    }
+    
     public Usuario[] getUsuarios() {
         return usuarios;
     }
